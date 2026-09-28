@@ -13,7 +13,7 @@ export class HeaderComponent {
   @Input() title: string = "Nuestro logo";
 
   navLinks = [
-    { label: 'Noticias', path: '#' },
+    { label: 'Noticias', path: '/noticias' },
     { label: 'Contactanos', path: '#' },
     { label: 'Tus favoritos', path: '#' },
     { label: 'Publica tu historia', path: '#' }
