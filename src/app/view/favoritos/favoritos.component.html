@@ -1,0 +1,43 @@
+<div class="container py-4">
+  <h2 class="text-primary fw-bold mb-4">Tus favoritos</h2>
+
+  <div class="row g-3 mb-2">
+    <div class="col-12 col-md-6">
+      <input type="text" class="form-control" placeholder="Busca por nombre...." />
+    </div>
+    <div class="col-12 col-md-6">
+      <select class="form-select">
+        <option value="">Selecciona la categoría</option>
+        <option>Institucional</option>
+        <option>Deportes</option>
+        <option>Cultura</option>
+        <option>Tecnología</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col" *ngFor="let favorito of favoritos">
+      <div class="card h-100">
+        <div class="row g-0 h-100">
+          <div class="col-4">
+            <img
+              [src]="favorito.imagen"
+              class="img-fluid rounded-start h-100"
+              [alt]="favorito.titulo"
+            />
+          </div>
+          <div class="col-8">
+            <div class="card-body">
+              <h6 class="card-title">{{ favorito.titulo }}</h6>
+              <p class="card-text small">
+                {{ favorito.resumen }}
+                <a href="#" class="text-primary">Ver más</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
