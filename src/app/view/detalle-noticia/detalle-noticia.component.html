@@ -1,0 +1,47 @@
+<div class="container py-4">
+  <article class="article">
+    <section class="intro">
+      <div class="intro-text">
+        <div class="category">{{ article.category }}</div>
+
+        <h1>{{ article.title }}</h1>
+
+        <p class="summary">{{ article.summary }}</p>
+
+        <div class="article-info">
+          <span><i class="bi bi-calendar3"></i> {{ article.date }}</span>
+          <span><i class="bi bi-clock"></i> {{ article.time }}</span>
+          <span><i class="bi bi-person"></i> {{ article.author }}</span>
+          <span
+            ><i class="bi bi-hourglass-split"></i> {{ article.readTime }}</span
+          >
+        </div>
+      </div>
+      
+      <figure class="main-image">
+        <img [src]="article.image" [alt]="article.title" />
+        <figcaption>Imagen ilustrativa de Bogotá · Unsplash</figcaption>
+      </figure>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="article-body">
+      @for (paragraph of article.paragraphs; track paragraph) {
+        <p>{{ paragraph }}</p>
+      }
+
+      <div class="source-box">
+        <div>
+          <strong>Fuente:</strong> {{ article.source }}
+          <span> · {{ article.date }}</span>
+        </div>
+        <a [href]="article.sourceUrl" target="_blank" rel="noopener">
+          Ver publicación original <i class="bi bi-box-arrow-up-right"></i>
+        </a>
+      </div>
+
+      <p class="source-note">{{ article.sourceNote }}</p>
+    </section>
+  </article>
+</div>

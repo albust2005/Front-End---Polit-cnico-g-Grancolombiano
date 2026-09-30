@@ -49,6 +49,12 @@
   margin: 0 5px;
 }
 
+.carousel-control-prev,
+.carousel-control-next {
+  z-index: 10 !important; 
+  width: 5%; 
+}
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   width: 3rem;
