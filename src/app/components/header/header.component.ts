@@ -14,8 +14,8 @@ export class HeaderComponent {
 
   navLinks = [
     { label: 'Noticias', path: '/noticias' },
-    { label: 'Contactanos', path: '#' },
+    { label: 'Contactanos', path: '/contacto' },
     { label: 'Tus favoritos', path: '/favoritos' },
-    { label: 'Publica tu historia', path: '#' }
+    { label: 'Publica tu historia', path: '/publica-historia' }
   ]
 }
