@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { CardNoticiaComponent } from '../../components/card-noticia/card-noticia.component';
 
 interface Noticia {
   id: number;
@@ -13,7 +14,7 @@ interface Noticia {
 @Component({
   selector: 'app-noticias',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, CardNoticiaComponent],
   templateUrl: './noticias.component.html',
   styleUrl: './noticias.component.css'
 })

@@ -1,4 +1,6 @@
-.card-img-top {
-  height: 180px;
-  object-fit: cover;
+.separador{
+    background-color: rgba(128, 128, 128, 0.327);
+    height: 1px;
+    width: 100%;
+    margin: 1rem 0 1.5rem 0;
 }

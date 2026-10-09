@@ -29,46 +29,52 @@
         class="btn btn-primary w-100"
         (click)="toggleFormulario()"
       >
-        {{ mostrarFormulario ? 'Cerrar' : 'Nueva Noticia' }}
+        {{ mostrarFormulario ? "Cerrar" : "Nueva Noticia" }}
       </button>
     </div>
   </div>
 
+  <div class="separador"></div>
+
   <div class="row row-cols-1 row-cols-md-2 g-4">
     <div class="col" *ngFor="let noticia of noticiasPagina">
-      <div class="card h-100">
-        <div class="row g-0 h-100">
-          <div class="col-4">
-            <img [src]="noticia.imagen" class="img-fluid rounded-start h-100" [alt]="noticia.titulo" />
-          </div>
-          <div class="col-8">
-            <div class="card-body">
-              <h6 class="card-title">{{ noticia.titulo }}</h6>
-              <p class="card-text small">
-                {{ noticia.resumen }}
-                <a href="#" class="text-primary">Ver más</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <app-card-noticia
+        [titulo]="noticia.titulo"
+        [imagen]="noticia.imagen"
+        [resumen]="noticia.resumen"
+      />
     </div>
   </div>
 
   <nav class="mt-4" *ngIf="totalPaginas > 1">
     <ul class="pagination justify-content-center">
       <li class="page-item" [class.disabled]="paginaActual === 1">
-        <a class="page-link" href="#" (click)="irAPagina(paginaActual - 1); $event.preventDefault()">&lt;</a>
+        <a
+          class="page-link"
+          href="#"
+          (click)="irAPagina(paginaActual - 1); $event.preventDefault()"
+          >&lt;</a
+        >
       </li>
       <li
         class="page-item"
         *ngFor="let pagina of paginasArray"
         [class.active]="paginaActual === pagina"
       >
-        <a class="page-link" href="#" (click)="irAPagina(pagina); $event.preventDefault()">{{ pagina }}</a>
+        <a
+          class="page-link"
+          href="#"
+          (click)="irAPagina(pagina); $event.preventDefault()"
+          >{{ pagina }}</a
+        >
       </li>
       <li class="page-item" [class.disabled]="paginaActual === totalPaginas">
-        <a class="page-link" href="#" (click)="irAPagina(paginaActual + 1); $event.preventDefault()">&gt;</a>
+        <a
+          class="page-link"
+          href="#"
+          (click)="irAPagina(paginaActual + 1); $event.preventDefault()"
+          >&gt;</a
+        >
       </li>
     </ul>
   </nav>

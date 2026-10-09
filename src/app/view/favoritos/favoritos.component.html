@@ -16,28 +16,15 @@
     </div>
   </div>
 
+  <div class="separador"></div>
+
   <div class="row row-cols-1 row-cols-md-2 g-4">
     <div class="col" *ngFor="let favorito of favoritos">
-      <div class="card h-100">
-        <div class="row g-0 h-100">
-          <div class="col-4">
-            <img
-              [src]="favorito.imagen"
-              class="img-fluid rounded-start h-100"
-              [alt]="favorito.titulo"
-            />
-          </div>
-          <div class="col-8">
-            <div class="card-body">
-              <h6 class="card-title">{{ favorito.titulo }}</h6>
-              <p class="card-text small">
-                {{ favorito.resumen }}
-                <a href="#" class="text-primary">Ver más</a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <app-card-noticia
+        [titulo]="favorito.titulo"
+        [imagen]="favorito.imagen"
+        [resumen]="favorito.resumen"
+      />
     </div>
   </div>
 </div>

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CreateNewsComponent } from '../create-news/create-news.component';
+import { CardNoticiaComponent } from '../../components/card-noticia/card-noticia.component';
 
 interface Noticia {
   id: number;
@@ -14,7 +15,7 @@ interface Noticia {
 @Component({
   selector: 'app-publica-historia',
   standalone: true,
-  imports: [CommonModule, FormsModule, CreateNewsComponent],
+  imports: [CommonModule, FormsModule, CreateNewsComponent, CardNoticiaComponent],
   templateUrl: './publica-historia.component.html',
   styleUrl: './publica-historia.component.css'
 })
