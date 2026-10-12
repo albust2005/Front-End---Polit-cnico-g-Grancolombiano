@@ -5,12 +5,13 @@
     data-bs-ride="carousel"
   >
     <div class="carousel-inner h-100">
+
       <div class="carousel-item active h-100">
-        <div class="hero-overlay d-flex align-items-center text-center">
+        <div class="hero-overlay d-flex align-items-center text-center text-md-start">
           <div class="container text-white">
-            <div class="col-md-5">
-              <h1 class="display-4 fst-italic fw-bold">Bienvenido</h1>
-              <p class="fs-5 p-3">
+            <div class="col-12 col-md-8 col-lg-5 px-3 px-md-0 text-content">
+              <h1 class="display-5 display-md-4 fst-italic fw-bold">Bienvenido</h1>
+              <p class="fs-6 fs-md-5 p-2 p-md-3">
                 [Nombre de la editorial] está para usted siempre<br />
                 Para informarle los últimos acontecimientos
               </p>
@@ -24,11 +25,11 @@
         </div>
       </div>
       <div class="carousel-item h-100">
-        <div class="hero-overlay d-flex align-items-center text-center">
+        <div class="hero-overlay d-flex align-items-center text-center text-md-start">
           <div class="container text-white">
-            <div class="col-md-5">
-              <h1 class="display-4 fst-italic fw-bold">Bienvenido</h1>
-              <p class="fs-5 p-3">
+            <div class="col-12 col-md-8 col-lg-5 px-3 px-md-0 text-content">
+              <h1 class="display-5 display-md-4 fst-italic fw-bold">Bienvenido</h1>
+              <p class="fs-6 fs-md-5 p-2 p-md-3">
                 [Nombre de la editorial] está para usted siempre<br />
                 Para informarle los últimos acontecimientos
               </p>
@@ -42,11 +43,11 @@
         </div>
       </div>
       <div class="carousel-item h-100">
-        <div class="hero-overlay d-flex align-items-center text-center">
+        <div class="hero-overlay d-flex align-items-center text-center text-md-start">
           <div class="container text-white">
-            <div class="col-md-5">
-              <h1 class="display-4 fst-italic fw-bold">Bienvenido</h1>
-              <p class="fs-5 p-3">
+            <div class="col-12 col-md-8 col-lg-5 px-3 px-md-0 text-content">
+              <h1 class="display-5 display-md-4 fst-italic fw-bold">Bienvenido</h1>
+              <p class="fs-6 fs-md-5 p-2 p-md-3">
                 [Nombre de la editorial] está para usted siempre<br />
                 Para informarle los últimos acontecimientos
               </p>
@@ -102,8 +103,8 @@
   </div>
 
   <div class="container my-5" *ngIf="noticiaPrincipal">
-    <div class="row">
-      <div class="col-lg-6 mb-4 mb-lg-0 pe-lg-4">
+    <div class="row align-items-stretch">
+      <div class="col-lg-6 mb-lg-0 pe-lg-4 border-end-lg border-muted">
         <div class="card border-0 h-100">
           <img
             [src]="noticiaPrincipal.imagen"
@@ -124,7 +125,9 @@
         </div>
       </div>
 
-      <!-- <div class="d-none d-lg-block border-end col-lg-0"></div> -->
+      <div class="col-12 d-lg-none my-2">
+        <hr class="text-muted">
+      </div>
 
       <div class="col-lg-6 ps-lg-4">
         <div class="d-flex flex-column gap-3">

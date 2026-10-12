@@ -6,13 +6,25 @@
       {{ title }}
     </a>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav d-flex gap-4">
-        <li class="nav-item" *ngFor="let link of navLinks">
+    <button
+      class="navbar-toggler border-0 shadow-none d-lg-none"
+      type="button"
+      (click)="toggleMenu()"
+      aria-label="Toggle navigation"
+    >
+      <span class="material-symbols-outlined fs-2 text-primary">
+        {{ menuOpen ? "close" : "menu" }}
+      </span>
+    </button>
+
+    <div class="collapse navbar-collapse pt-3 pt-lg-0 border-top border-lg-0 mt-3 mt-lg-0" [class.show]="menuOpen" id="navbarNav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-items-lg-center">
+        <li class="nav-item me-lg-3 mb-2 mb-lg-0" *ngFor="let link of navLinks">
           <a
-            class="nav-link text-primary px-0"
+            class="nav-link text-primary px-0 me-3"
             [routerLink]="link.path"
             routerLinkActive="active border-bottom border-primary border-2"
+            (click)="closeMenu()"
           >
             {{ link.label }}
           </a>

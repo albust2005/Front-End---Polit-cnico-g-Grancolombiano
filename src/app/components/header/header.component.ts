@@ -10,6 +10,16 @@ import { RouterModule } from '@angular/router';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  menuOpen = false;
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen; 
+  }
+
+  closeMenu() {
+    this.menuOpen = false;
+  }
+
   @Input() title: string = "Nuestro logo";
 
   navLinks = [

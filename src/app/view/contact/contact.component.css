@@ -23,3 +23,8 @@ background-color: #f6f6f6;
 .boton-enviar{
 background-color: #718fe2;
 }
+
+.titulo{
+    max-width: 900px;
+    margin: 0 auto;
+}
