@@ -62,6 +62,11 @@
   height: 3rem;
 }
 
+.titulo_carrusel {
+  font-size: 4rem;
+  line-height: 1.1;
+}
+
 @media (min-width: 992px) {
   .border-end-lg {
     border-right: 1px solid #dee2e6 !important;
@@ -69,6 +74,10 @@
 }
 
 @media (max-width: 767px) {
+
+  .titulo_carrusel{
+    font-size: 1.5rem;
+  }
 
   .hero-section{
     height: 300px;

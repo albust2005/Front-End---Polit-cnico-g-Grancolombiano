@@ -12,16 +12,17 @@
       />
     </div>
     <div class="col-12 col-md-4">
-      <select
-        class="form-select"
-        [(ngModel)]="categoriaSeleccionada"
-        (ngModelChange)="reiniciarPagina()"
-      >
-        <option value="">Selecciona la categoría</option>
-        <option *ngFor="let categoria of categorias" [value]="categoria">
-          {{ categoria }}
-        </option>
-      </select>
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary w-100 dropdown-toggle text-start d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{ categoriaSeleccionada || 'Seleccionar Categoria' }}
+        </button>
+        <ul class="dropdown-menu w-100 shadow">
+          <li><a class="dropdown-item" (click)="categoriaSeleccionada = ''; reiniciarPagina()">Todas / Selecciona la categoria</a></li>
+          <li *ngFor="let categoria of categorias">
+            <a class="dropdown-item" (click)="categoriaSeleccionada = categoria; reiniciarPagina()">{{ categoria }}</a>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="col-12 col-md-3">
       <button
@@ -32,6 +33,10 @@
         {{ mostrarFormulario ? "Cerrar" : "Nueva Noticia" }}
       </button>
     </div>
+  </div>
+
+  <div class="mt-5" *ngIf="mostrarFormulario">
+    <app-create-news></app-create-news>
   </div>
 
   <div class="separador"></div>
@@ -78,8 +83,4 @@
       </li>
     </ul>
   </nav>
-
-  <div class="mt-5" *ngIf="mostrarFormulario">
-    <app-create-news></app-create-news>
-  </div>
 </div>

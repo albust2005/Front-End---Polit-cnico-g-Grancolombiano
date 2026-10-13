@@ -22,5 +22,12 @@ createNews(){
     })
   }
 
+  categorias = [
+    { name: "Educativa", value: "educativa" },
+    { name: "Tecnològica", value: "tecnologica" },
+    { name: "Turìstica", value: "turistica" },
+    { name: "Comercial", value: "comercial" }
+  ]
+
 }
 
