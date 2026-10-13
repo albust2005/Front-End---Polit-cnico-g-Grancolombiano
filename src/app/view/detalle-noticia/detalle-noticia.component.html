@@ -1,47 +1,42 @@
-<div class="container py-4">
+<div class="container py-4" *ngIf="noticia; else noEncontrada">
   <article class="article">
     <section class="intro">
       <div class="intro-text">
-        <div class="category">{{ article.category }}</div>
+        <div class="category">{{ noticia.categoria }}</div>
 
-        <h1>{{ article.title }}</h1>
+        <h1>{{ noticia.titulo }}</h1>
 
-        <p class="summary">{{ article.summary }}</p>
+        <p class="summary">{{ noticia.resumen }}</p>
 
-        <div class="article-info">
-          <span><i class="bi bi-calendar3"></i> {{ article.date }}</span>
-          <span><i class="bi bi-clock"></i> {{ article.time }}</span>
-          <span><i class="bi bi-person"></i> {{ article.author }}</span>
-          <span
-            ><i class="bi bi-hourglass-split"></i> {{ article.readTime }}</span
-          >
+        <div class="actions">
+          <button
+            type="button"
+            class="action-btn"
+            [class.active]="noticia.destacada"
+            (click)="toggleDestacada()">
+            <i class="bi" [class.bi-star-fill]="noticia.destacada" [class.bi-star]="!noticia.destacada"></i>
+            {{ noticia.destacada ? 'Desmarcar como destacada' : 'Marcar como destacada' }}
+          </button>
+          <button type="button" class="action-btn" (click)="editar()">
+            <i class="bi bi-pencil-square"></i> Editar
+          </button>
+          <button type="button" class="action-btn" (click)="eliminar()">
+            <i class="bi bi-trash-fill"></i> Eliminar
+          </button>
         </div>
       </div>
-      
+
       <figure class="main-image">
-        <img [src]="article.image" [alt]="article.title" />
-        <figcaption>Imagen ilustrativa de Bogotá · Unsplash</figcaption>
+        <img [src]="noticia.imagen" [alt]="noticia.titulo" />
       </figure>
     </section>
 
     <div class="divider"></div>
-
-    <section class="article-body">
-      @for (paragraph of article.paragraphs; track paragraph) {
-        <p>{{ paragraph }}</p>
-      }
-
-      <div class="source-box">
-        <div>
-          <strong>Fuente:</strong> {{ article.source }}
-          <span> · {{ article.date }}</span>
-        </div>
-        <a [href]="article.sourceUrl" target="_blank" rel="noopener">
-          Ver publicación original <i class="bi bi-box-arrow-up-right"></i>
-        </a>
-      </div>
-
-      <p class="source-note">{{ article.sourceNote }}</p>
-    </section>
   </article>
 </div>
+
+<ng-template #noEncontrada>
+  <div class="container py-4">
+    <p>No se encontró la noticia solicitada.</p>
+  </div>
+</ng-template>

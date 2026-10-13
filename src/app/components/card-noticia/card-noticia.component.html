@@ -12,8 +12,17 @@
         <h6 class="card-title">{{ titulo }}</h6>
         <p class="card-text small">
           {{ resumen }}
-          <a href="#" class="text-primary">Ver más</a>
+          <a [routerLink]="['/detalle-noticia', id]" class="text-primary">Ver más</a>
         </p>
+        <button
+          *ngIf="mostrarBotonDestacada"
+          type="button"
+          class="btn btn-sm btn-link text-warning p-0"
+          (click)="toggleDestacada.emit(id)"
+        >
+          <i class="bi" [class.bi-star-fill]="destacada" [class.bi-star]="!destacada"></i>
+          {{ destacada ? 'Desmarcar como destacada' : 'Marcar como destacada' }}
+        </button>
       </div>
     </div>
   </div>

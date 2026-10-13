@@ -1,17 +1,15 @@
 <div class="container my-4">
   <div class="mb-3">
-    <h2 style="color: #718fe2;">Inscribir una noticia</h2>
-    <p>Diligencia este formulario para registrar una noticia.</p>
+    <h2 style="color: #718fe2;">{{ modoEdicion ? 'Editar noticia' : 'Inscribir una noticia' }}</h2>
+    <p>Diligencia este formulario para {{ modoEdicion ? 'editar' : 'registrar' }} una noticia.</p>
   </div>
 
   <div class="card formulario-noticia">
     <div class="card-body p-4">
       <h3 class="mb-4" style="color: gray;">Formulario de registro</h3>
 
-      <form>
+      <form #f="ngForm" (ngSubmit)="guardar()">
         <div class="row">
-          <i class="bi bi-trash-fill"></i>
-
           <!-- COLUMNA IZQUIERDA -->
           <div class="col-md-6">
             <!-- Título -->
@@ -19,64 +17,93 @@
               <input
                 type="text"
                 id="titulo"
+                name="titulo"
                 class="form-control"
-                placeholder="Título de la noticia">
+                placeholder="Título de la noticia"
+                [(ngModel)]="titulo"
+                #tituloCtrl="ngModel"
+                required
+                minlength="5"
+                [class.is-invalid]="tituloCtrl.invalid && tituloCtrl.touched">
+              <div class="invalid-feedback" *ngIf="tituloCtrl.invalid && tituloCtrl.touched">
+                El título debe tener al menos 5 caracteres.
+              </div>
             </div>
 
             <!-- Categoría -->
             <div class="mb-3">
               <select
                 id="categoria"
-                class="form-select">
-                <option selected disabled>Selecciona la categoría</option>
-                <option value="educativa">Educativa</option>
-                <option value="tecnologica">Tecnológica</option>
-                <option value="turistica">Turística</option>
-                <option value="comercial">Comercial</option>
+                name="categoria"
+                class="form-select"
+                [(ngModel)]="categoria"
+                #categoriaCtrl="ngModel"
+                required
+                [class.is-invalid]="categoriaCtrl.invalid && categoriaCtrl.touched">
+                <option value="" disabled>Selecciona la categoría</option>
+                <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
               </select>
+              <div class="invalid-feedback" *ngIf="categoriaCtrl.invalid && categoriaCtrl.touched">
+                Selecciona una categoría.
+              </div>
             </div>
 
             <!-- Resumen -->
             <div class="mb-3">
               <textarea
                 id="resumen"
+                name="resumen"
                 class="form-control"
                 rows="3"
-                placeholder="Resumen (Máximo 40 palabras)"></textarea>
+                placeholder="Resumen (Máximo 40 palabras)"
+                [(ngModel)]="resumen"
+                #resumenCtrl="ngModel"
+                required
+                minlength="20"
+                [class.is-invalid]="resumenCtrl.invalid && resumenCtrl.touched"></textarea>
+              <div class="invalid-feedback" *ngIf="resumenCtrl.invalid && resumenCtrl.touched">
+                El resumen debe tener al menos 20 caracteres.
+              </div>
             </div>
           </div>
 
           <!-- COLUMNA DERECHA -->
           <div class="col-md-6">
-            <div class="contenedor-imagen">
-              <div class="texto-imagen">Insertar una imagen</div>
-              <button
-                type="button"
-                class="btn btn-outline-secondary btn-sm">
-                Cargar imagen
-              </button>
+            <div class="mb-3">
+              <label for="imagen" class="form-label">Imagen (ruta o URL)</label>
+              <input
+                type="text"
+                id="imagen"
+                name="imagen"
+                class="form-control"
+                placeholder="assets/images/noticias/noticia-1.jpg"
+                [(ngModel)]="imagen"
+                #imagenCtrl="ngModel"
+                required
+                [class.is-invalid]="imagenCtrl.invalid && imagenCtrl.touched">
+              <div class="invalid-feedback" *ngIf="imagenCtrl.invalid && imagenCtrl.touched">
+                Ingresa una ruta o URL de imagen.
+              </div>
+
+              <div class="contenedor-imagen mt-3" *ngIf="imagen">
+                <img [src]="imagen" [alt]="titulo" class="img-fluid" style="max-height: 100%;">
+              </div>
             </div>
           </div>
-        </div>
-
-        <!-- CONTENIDO DE LA NOTICIA -->
-        <div class="mb-3">
-          <textarea
-            id="contenido"
-            class="form-control contenido-noticia"
-            placeholder="Escribe aquí el contenido de la noticia..."></textarea>
         </div>
 
         <!-- BOTONES -->
         <div class="d-flex gap-3">
           <button
-            type="button"
-            class="btn btn-primary enviar" (click)="createNews()">
-            Enviar
+            type="submit"
+            class="btn btn-primary enviar"
+            [disabled]="f.invalid">
+            {{ modoEdicion ? 'Guardar cambios' : 'Enviar' }}
           </button>
           <button
-            type="reset"
-            class="btn btn-outline-secondary">
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="limpiar()">
             Limpiar
           </button>
         </div>
@@ -84,7 +111,3 @@
     </div>
   </div>
 </div>
-
-<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-  <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
-</svg>

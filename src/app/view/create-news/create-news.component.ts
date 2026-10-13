@@ -1,26 +1,83 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { RouterModule, ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { CATEGORIAS_NOTICIA } from '../../models/noticia.model';
+import { NoticiasService } from '../../services/noticias.service';
 
 @Component({
   selector: 'app-create-news',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './create-news.component.html',
   styleUrl: './create-news.component.css'
 })
-export class CreateNewsComponent {
+export class CreateNewsComponent implements OnInit {
+  categorias = CATEGORIAS_NOTICIA;
 
+  titulo = '';
+  categoria = '';
+  resumen = '';
+  imagen = '';
 
-createNews(){
-    Swal.fire({
-      title: '<span style="color: #6c8fe3;">Se ha registrado su noticia</span>',
-      text: 'Se ha creado con exito.',
-      confirmButtonText: 'Volver al inicio',
-      confirmButtonColor: '#718fe2'
-    })
+  modoEdicion = false;
+  private idEdicion?: number;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private noticiasService: NoticiasService
+  ) {}
+
+  async ngOnInit() {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (!idParam) return;
+
+    this.modoEdicion = true;
+    this.idEdicion = Number(idParam);
+
+    const noticia = await this.noticiasService.getById(this.idEdicion);
+    if (noticia) {
+      this.titulo = noticia.titulo;
+      this.categoria = noticia.categoria;
+      this.resumen = noticia.resumen;
+      this.imagen = noticia.imagen;
+    }
   }
 
-}
+  async guardar() {
+    const datos = {
+      titulo: this.titulo,
+      categoria: this.categoria,
+      resumen: this.resumen,
+      imagen: this.imagen
+    };
 
+    if (this.modoEdicion && this.idEdicion !== undefined) {
+      await this.noticiasService.update(this.idEdicion, datos);
+    } else {
+      await this.noticiasService.create(datos);
+    }
+
+    Swal.fire({
+      title: '<span style="color: #6c8fe3;">Se ha registrado su noticia</span>',
+      text: 'Se ha guardado con éxito.',
+      confirmButtonText: 'Volver al inicio',
+      confirmButtonColor: '#718fe2'
+    }).then(() => {
+      if (this.modoEdicion && this.idEdicion !== undefined) {
+        this.router.navigate(['/detalle-noticia', this.idEdicion]);
+      } else {
+        this.limpiar();
+      }
+    });
+  }
+
+  limpiar() {
+    this.titulo = '';
+    this.categoria = '';
+    this.resumen = '';
+    this.imagen = '';
+  }
+}
