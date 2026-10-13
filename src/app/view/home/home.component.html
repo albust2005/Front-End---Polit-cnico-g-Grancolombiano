@@ -117,7 +117,7 @@
             </h3>
             <p class="card-text text-muted">
               {{ noticiaPrincipal.resumen }}
-              <a href="/detalle_noticia" class="text-primary text-decoration-underline ms-1"
+              <a [routerLink]="['/detalle-noticia', noticiaPrincipal.id]" class="text-primary text-decoration-underline ms-1"
                 >Ver más</a
               >
             </p>
@@ -153,12 +153,20 @@
                   <p class="card-text small text-muted mb-0">
                     {{ noticia.resumen }}
                     <a
-                      href="#"
+                      [routerLink]="['/detalle-noticia', noticia.id]"
                       class="text-primary text-decoration-underline ms-1"
                     >
                       Ver más
                     </a>
                   </p>
+
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-link text-warning p-0 mt-1"
+                    (click)="onToggleDestacada(noticia.id)"
+                  >
+                    Desmarcar como destacada
+                  </button>
                 </div>
               </div>
             </div>
