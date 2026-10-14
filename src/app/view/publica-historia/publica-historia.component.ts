@@ -3,14 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CreateNewsComponent } from '../create-news/create-news.component';
 import { CardNoticiaComponent } from '../../components/card-noticia/card-noticia.component';
-
-interface Noticia {
-  id: number;
-  titulo: string;
-  imagen: string;
-  categoria: string;
-  resumen: string;
-}
+import { Noticia } from '../../models/noticia.model';
+import { NoticiasService } from '../../services/noticias.service';
 
 @Component({
   selector: 'app-publica-historia',
@@ -31,10 +25,17 @@ export class PublicaHistoriaComponent implements OnInit {
 
   mostrarFormulario: boolean = false;
 
+  constructor(private noticiasService: NoticiasService) {}
+
   async ngOnInit() {
-    const respuesta = await fetch('assets/data/noticias.json');
-    this.noticias = await respuesta.json();
-    this.categorias = [...new Set(this.noticias.map(n => n.categoria))];
+    this.noticias = await this.noticiasService.getAll();
+    this.categorias = await this.noticiasService.getCategorias();
+  }
+
+  async onNoticiaGuardada() {
+    this.noticias = await this.noticiasService.getAll();
+    this.categorias = await this.noticiasService.getCategorias();
+    this.mostrarFormulario = false;
   }
 
   get noticiasFiltradas(): Noticia[] {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
@@ -23,6 +23,8 @@ export class CreateNewsComponent implements OnInit {
 
   modoEdicion = false;
   private idEdicion?: number;
+
+  @Output() noticiaGuardada = new EventEmitter<void>();
 
   constructor(
     private route: ActivatedRoute,
@@ -59,6 +61,8 @@ export class CreateNewsComponent implements OnInit {
     } else {
       await this.noticiasService.create(datos);
     }
+
+    this.noticiaGuardada.emit();
 
     Swal.fire({
       title: '<span style="color: #6c8fe3;">Se ha registrado su noticia</span>',
