@@ -2,14 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { CardNoticiaComponent } from '../../components/card-noticia/card-noticia.component';
 import { FormsModule } from '@angular/forms';
-
-interface Noticia {
-  id: number;
-  titulo: string;
-  imagen: string;
-  categoria: string;
-  resumen: string;
-}
+import { Noticia } from '../../models/noticia.model';
+import { NoticiasService } from '../../services/noticias.service';
 
 @Component({
   selector: 'app-favoritos',
@@ -28,10 +22,10 @@ export class FavoritosComponent implements OnInit {
   paginaActual: number = 1;
   porPagina: number = 6;
 
+  constructor(private noticiasService: NoticiasService) {}
+
   async ngOnInit() {
-    const respuesta = await fetch('assets/data/noticias.json');
-    const noticias: Noticia[] = await respuesta.json();
-    this.favoritos = noticias.slice(0, 2);
+    this.favoritos = await this.noticiasService.getDestacadas();
     this.categorias = [...new Set(this.favoritos.map(f => f.categoria))];
   }
 

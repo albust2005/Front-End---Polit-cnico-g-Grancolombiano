@@ -36,7 +36,7 @@
   </div>
 
   <div class="mt-5" *ngIf="mostrarFormulario">
-    <app-create-news></app-create-news>
+    <app-create-news (noticiaGuardada)="onNoticiaGuardada()"></app-create-news>
   </div>
 
   <div class="separador"></div>
