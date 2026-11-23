@@ -19,9 +19,11 @@ export class NoticiasService {
     }
 
     const respuesta = await fetch('assets/data/noticias.json');
-    const datos: Array<Omit<Noticia, 'destacada'>> = await respuesta.json();
-    const idsDestacadasPorDefecto = [2, 3, 4];
-    this.noticias = datos.map(n => ({ ...n, destacada: idsDestacadasPorDefecto.includes(n.id) }));
+    const datos: Noticia[] = await respuesta.json();
+    this.noticias = datos.map(n => ({
+      ...n,
+      destacada: Boolean(n.destacada)
+    }));
     this.guardar();
   }
 

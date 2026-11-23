@@ -25,17 +25,21 @@ export class FavoritosComponent implements OnInit {
   constructor(private noticiasService: NoticiasService) {}
 
   async ngOnInit() {
-    this.favoritos = await this.noticiasService.getDestacadas();
+    const todasDestacadas = await this.noticiasService.getDestacadas();
+    this.favoritos = todasDestacadas.filter(n => n.destacada);
     this.categorias = [...new Set(this.favoritos.map(f => f.categoria))];
   }
 
   get noticiasFiltradas(): Noticia[] {
+    const textoBusqueda = (this.busqueda || "").toLowerCase().trim();
+
     return this.favoritos.filter(n => {
-      const coincideNombre = n.titulo.toLowerCase().includes(this.busqueda.toLowerCase());
+      const esDestacada = Boolean(n.destacada);
+      const coincideNombre = (n.titulo || "").toLowerCase().includes(textoBusqueda);
       const coincideCategoria = this.categoriaSeleccionada
         ? n.categoria === this.categoriaSeleccionada
         : true;
-      return coincideNombre && coincideCategoria;
+      return coincideNombre && coincideCategoria && esDestacada;
     });
   }
 

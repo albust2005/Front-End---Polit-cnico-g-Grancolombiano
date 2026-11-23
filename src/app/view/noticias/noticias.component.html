@@ -28,7 +28,7 @@
 
   <div class="separador"></div>
 
-  <div class="row row-cols-1 row-cols-md-2 g-4">
+  <div *ngIf="noticiasPagina.length > 0; else sinNoticias" class="row row-cols-1 row-cols-md-2 g-4">
     <div class="col" *ngFor="let noticia of noticiasPagina">
       <app-card-noticia
         [id]="noticia.id"
@@ -40,6 +40,15 @@
       />
     </div>
   </div>
+
+  <ng-template #sinNoticias>
+    <div class="text-center py-5 my-4">
+      <h5 class="text-muted mb-1">No hay noticias destacadas</h5>
+      <p class="text-secondary small mb-0">
+        No se encontraron noticias destacadas para mostrar en este momento.
+      </p>
+    </div>
+  </ng-template>
 
   <nav class="mt-4" *ngIf="totalPaginas > 1">
     <ul class="pagination justify-content-center">
